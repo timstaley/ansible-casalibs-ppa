@@ -1,2 +1,4 @@
 ---
-# vars file for roletemplate
+# vars file for casalibs-ppa
+casacore_version: "radio_astro_ppa"
+casacore_install_path: "/usr"

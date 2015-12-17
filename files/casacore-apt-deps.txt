@@ -1,0 +1,4 @@
+build-essential cmake gfortran g++ libncurses5-dev
+libreadline-dev flex bison libblas-dev liblapacke-dev libcfitsio3-dev
+wcslib-dev
+libboost-python-dev
