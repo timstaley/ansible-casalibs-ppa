@@ -6,14 +6,27 @@
   with_items: "{{ lookup('file', 'casacore-apt-deps.txt').split() }}"
   become: yes
 
-- name: Add casacore PPA
-  apt_repository: repo="ppa:radio-astro/main"
+- name: Add Kern-1 PPA
+  apt_repository: repo="ppa:kernsuite/kern-1"
   become: yes
 
-- name: Install casacore from PPA
+- name: Enable ubuntu multiverse repository
+  apt_repository:
+    repo: "{{item}}"
+  become: yes
+  with_items:
+    - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
+    - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
+    - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates multiverse'
+    - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates multiverse'
+
+- name: Install casacore from Kern1
   apt: name={{item}} update_cache=yes cache_valid_time=600
   with_items:
-    - casacore2
+    - casacore-dev
     - casacore-data
-    - libcasacore2-dev
+    - python-casacore
   become: yes
+
+- include: check_casalibs_ok.yml
+  tags: test

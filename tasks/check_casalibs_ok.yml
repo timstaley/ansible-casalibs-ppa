@@ -1,0 +1,5 @@
+- name: Check casalibs import OK
+  shell: >
+          python -c "from casacore import measures,tables; print('A-OK');"
+  changed_when: False
+  tags: test
